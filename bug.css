@@ -1,0 +1,13 @@
+The CSS property `calc()` can sometimes produce unexpected results if you use it with percentage values that are dependent on the size of their containing element.  For example, if you have a div that is 50% wide, and then you try to set the width of a child element to `calc(50% - 10px)`, the result might not be what you expect. The reason is that the calculation of `50%` occurs *before* the 10px subtraction.
+
+Here's an example:
+```css
+div {
+  width: 50%;
+}
+div > span {
+  width: calc(50% - 10px);
+  background-color: lightblue;
+}
+```
+If the parent div is 400px wide, `50%` would be 200px.  The expected width of the span might be 190px (200px - 10px). However, in some browsers, the calc function might cause the span to be 0px or the parent div's width - 10px, resulting in unexpected rendering.
