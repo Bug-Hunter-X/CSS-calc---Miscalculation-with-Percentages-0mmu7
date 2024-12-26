@@ -1,0 +1,27 @@
+To solve this, we need to ensure that the calculation happens correctly.  Instead of calculating `50% - 10px` directly within the `calc()` function, we can calculate the 10px offset as a percentage.  This way, both the percentage calculation and the pixel subtraction are correctly applied.
+
+Let's say we want the span to be 10 pixels less than half the width of the container.  First, we need to determine what percentage 10 pixels represents relative to the container width.  This percentage depends on the context. 
+
+**A better approach:**  Avoid using `calc()` with percentages and instead use a more reliable calculation.
+
+If the container has a fixed width, use pixels for the span's width:
+```css
+div {
+  width: 400px;
+}
+div > span {
+  width: 190px; /* 200px - 10px */
+  background-color: lightblue;
+}
+```
+If the container has a fluid width, consider using viewport units (vw) or similar units that are better suited for responsive layouts. 
+```css
+div {
+  width: 50vw; 
+}
+div > span {
+  width: calc(50vw - 10px);
+  background-color: lightblue;
+}
+```
+This approach ensures that the subtraction is applied correctly, regardless of the container's width.
